@@ -2,6 +2,8 @@
  * TODO:
  * 1) Get the understanding of all the Object class methods: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object
  * 2) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
+ * 3) How to declare the immutable properties in the object.
+ * 4) How to define setter and getter? How to define the private properties - so that these are accessible through Getters only
  */
 
 /**
@@ -50,3 +52,26 @@ var person = {
     console.log(person[keyName]);
 
  }
+
+ /**
+  * An object can also have the functions defined.
+  * 
+  */
+ 
+  //Declaring our object first, this contains both the primitive properties & the functions
+  var person_wrapper = {
+    name: undefined,
+    age: undefined,
+    isMarried: undefined,
+    initializePerson: function(name, age, isMarried){
+        this.name = name;
+        this.age = age;
+        this.isMarried = isMarried;
+    }
+
+  }
+
+  //Now accessing the object's function
+  console.log(person_wrapper);
+  person_wrapper.initializePerson('Praveen', 32, true);
+  console.log(person_wrapper);
