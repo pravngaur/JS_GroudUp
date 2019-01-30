@@ -42,3 +42,47 @@
  console.log(returnObject.age);
  console.log(returnObject.name);
  console.log(returnObject.city);
+
+
+ /**
+  * One very intresting scenario:
+  * 
+  */
+
+  var personObject = {
+      name: 'Praveen',
+      age: 32,
+      city: 'Khurja',
+      printFunction: function(){
+          console.log(this);
+          function testPrinter(){
+            console.log(this);
+          }
+          testPrinter();
+      }
+  }
+  personObject.printFunction();
+
+  /**
+   * Method borrowing:
+   * This is when a methos defined in one object is used on the instance type of anothe object
+   */
+
+   var praveen = {
+       name: "Praveen",
+       age: 32,
+       consoleMethod: function(){
+           console.log(this.name);
+           console.log(this.age);
+       }
+   }
+   var neha = {
+       name: "Neha",
+       age: 30
+   }
+
+       
+   //Now calling the consoleMethod method on Neha object
+   neha.consoleMethod = praveen.consoleMethod;
+   praveen.consoleMethod();
+   neha.consoleMethod();

@@ -75,3 +75,6 @@ var person = {
   console.log(person_wrapper);
   person_wrapper.initializePerson('Praveen', 32, true);
   console.log(person_wrapper);
+
+
+  
