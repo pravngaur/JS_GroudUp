@@ -125,3 +125,35 @@ additionHelper([1,2,3,4]);
 multiplyHelper([1,2,3,4]);
 
 //******************* METHOD BORROWING USING bind : END ************************** */
+
+/**
+ * Another cool example, where we do not care about the this variable :)
+ * 
+ */
+
+ /**
+  * @description
+  * this function checks if a given citizen has reached full age or not.
+  * different countries, have different age limits. Hence it accepts two arguments:
+  * 1) Allowed age for a given country
+  * 2) age of the person
+  */
+
+  function isFullAge(countryAgeLimit, personAge){
+    if(countryAgeLimit && personAge && typeof countryAgeLimit === "number" && typeof personAge === "number"){
+        if(personAge >= countryAgeLimit) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+    return Error;
+  }
+
+  //using the bind method to create the country specific versions of the same method.
+
+  var isFullAgeJapan = isFullAge.bind(this, 20);//we really do not care about the value of this.
+  var isFullAgeIndia = isFullAge.bind(this, 18);
+
+  isFullAgeIndia(21);
+  isFullAgeIndia(17);
