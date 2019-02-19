@@ -70,9 +70,9 @@ let thisBehavior_6 = {
     name: 'praveen gaur',
     job: 'developer',
     describe: function(){
-        console.log(this.name + " is a " + this.job + ".");
+        console.log(`${this.name} is a ${this.job}.`);
         let changeJob = (newJob) => {
-            console.log(this.name + " who was a " + this.job + ", is now a " + newJob);// now this refers to the this in the lexical block of changeJob function
+            console.log(`${this.name} who was a ${this.job}, is now a ${newJob}.`);// now this refers to the this in the lexical block of changeJob function
             //which is describe function in which this refers to thisBehavior_6_hack object.
         }
         changeJob('Reader');
@@ -88,9 +88,9 @@ let thisBehavior_6_fail = {
     name: 'praveen gaur',
     job: 'developer',
     describe: () => {
-        console.log(this.name + " is a " + this.job + ".");
+        console.log(`${this.name} is a ${this.job}.`);
         let changeJob = (newJob) => {
-            console.log(this.name + " who was a " + this.job + ", is now a " + newJob);// now this refers to the this in the lexical block of changeJob function
+            console.log(`${this.name} who was a ${this.job}, is now a ${newJob}.`);// now this refers to the this in the lexical block of changeJob function
             //which is describe function in which this refers to thisBehavior_6_hack object.
         }
         changeJob('Reader');
