@@ -16,24 +16,24 @@
  * Promises, ensures to execute the code and return the value(both in success and failure) at some point in time in future. But it promises to execute asynchronusly.
  */
 
- //Example 1: Simple Promise example, resolving and rejecting on consition basis
+ //Example 1: Simple Promise example, resolving and rejecting on consdition basis
  const roomCleaning = (resolve, reject)=> {
     let num = Math.random();
     if(num >= .5){//Mimicing the success - room cleaned successfully
       resolve(num);
     }else{
-      reject(new Error(`oops!!, the number is ${num}`));//Mimicing the failure - room not cleaned
+      reject(new Error(num));//Mimicing the failure - room not cleaned
     }
   }
   const promise_1 = new Promise(roomCleaning);
   promise_1.then((resolveValue)=>{//Success handler, Football
-    console.log(`Success handler - room claened successfully!!`);
-    console.log(`Ho Ho, the number is ${resolveValue}`);
+    console.log(`Success handler - room claened successfully, football time!!`);
+    console.log(`resolveValue: ${resolveValue}`);
   });
 
   promise_1.catch((errorValue)=>{//Failure handler, laundry
-    console.log(`Error handler 1`);
-    console.log(`Oh Ho, it's an ${errorValue}`);
+    console.log(`Error handler - room not claened, has to do laundry`);
+    console.log(`error: ${errorValue}`);
   });
  
 
@@ -49,9 +49,9 @@
   *  promise_1.catch//second error handler
   * 
   * then all the registered handler will be executed
-  */
+  */  
 
-const executor = (resolve, reject)=> {
+const roomCleaning = (resolve, reject)=> {
     let num = Math.random();
     if(num >= .5){
       resolve(num);
@@ -59,24 +59,24 @@ const executor = (resolve, reject)=> {
       reject(new Error(`oops!!, the number is ${num}`));
     }
   }
-  const promise_1 = new Promise(executor);
+  const promise_1 = new Promise(roomCleaning);
   promise_1.then((resolveValue)=>{
-    console.log(`Resolve handler 1`);
-    console.log(`Ho Ho, the number is ${resolveValue}`);
+    console.log(`Resolve handler 1, value is ${resolveValue}`);
+    console.log(`room claened successfully, football time!!`);
   });
 
   promise_1.then((resolveValue)=>{//binding the multiple callback(s) to the same promise
-    console.log(`Resolve handler 2`);
-    console.log(`Ho Ho, the number is ${resolveValue}`);
+    console.log(`Resolve handler 2, value is ${resolveValue}`);
+    console.log(`After footbal, i will go for swimming!!`);
   });
   
   promise_1.catch((errorValue)=>{
-    console.log(`Error handler 1`);
-    console.log(`Oh Ho, it's an ${errorValue}`);
+    console.log(`Error handler 1, value is ${errorValue}`);
+    console.log(`Room not claened, has to do laundry`);
   });
   promise_1.catch((errorValue)=>{
-    console.log(`Error handler 2`);
-    console.log(`Oh Ho, it's an ${errorValue}`);
+    console.log(`Error handler 2, value is ${errorValue}`);
+    console.log(`After laundry, i need to clean my room anyway !!`);
   });
 
   /**
@@ -155,7 +155,58 @@ const executor = (resolve, reject)=> {
   promise_1.catch((errorValue)=>{
     console.log(`Oh Ho, it's an ${errorValue}`);
   });
-  
+  //----------------
+
+  const roomCleaning = (resolve, reject)=> {
+    let num = Math.random();
+    if(num >= .5){//Mimicing the success - room cleaned successfully
+      resolve(num);
+    }else{
+      reject(new Error(num));//Mimicing the failure - room not cleaned
+    }
+  }
+  const promise_1 = new Promise(roomCleaning);
+  promise_1.then((resolveValue)=>{//Success handler, Football
+    console.log(`Success handler - room claened successfully, football time!!. Resolve Value: ${resolveValue}`);
+      //New Promise to handle the additional tasks - which are dependent on this one.
+      //music concert vs dog cleaning.
+      new Promise((resolve, reject)=>{
+        let num = Math.random();
+        if(num >= .5){//Mimicing the success - go to concert
+          resolve(num);
+        }else{
+          reject(num);//Mimicing the error - dog cleaning
+        }
+      })
+    
+  }).then((resolveValue) => {
+    console.log(`Success handler - i am in music concert!!. Resolve Value: ${resolveValue}`);
+  }).catch((errorValue) => {
+    console.log(`Error handler - no goal, cleaning the dog :( ${errorValue}`);
+  })
+
+  promise_1.catch((errorValue)=>{//Failure handler, laundry
+    console.log(`Error handler - room not claened, has to do laundry. errorValue: ${errorValue}`);
+     
+     //New Promise to handle the additional tasks - which are dependent on this one.
+     //music concert vs dog cleaning.
+    new Promise((resolve, reject)=>{
+      let num = Math.random();
+      if(num >= .5){//Mimicing the success - go to concert
+        resolve(num);
+      }else{
+        reject(num);//Mimicing the error - dog cleaning
+      }
+    })
+  }).then((resolveValue) => {
+    console.log(`Success handler - i am in music concert!!. Resolve Value: ${resolveValue}`);
+  }).catch((errorValue) => {
+    console.log(`Error handler - no goal, cleaning the dog :( ${errorValue}`);
+  })
+
+//----------------
+
+
   /**
    * Error Handling:
    * Promises offers the abolity to handle the exceptions:
